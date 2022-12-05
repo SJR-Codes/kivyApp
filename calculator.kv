@@ -19,6 +19,9 @@
             Button:
                 id:btn_off
                 text:"OFF"
+                #set off default color for next line to be used as is
+                #background_normal:''
+                background_color:(1.5, 0.0, 0.0, 1.0)
                 size_hint:(.24, .19)
                 font_size:32
                 on_press:root.btn_exit()
@@ -141,6 +144,7 @@
             Button:
                 id:btn_equal
                 text:"="
+                background_color:(0.0, 1.5, 0.0, 1.0)
                 size_hint:(.24, .19)
                 font_size:32
                 on_press:root.btn_calculate()

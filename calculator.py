@@ -1,6 +1,10 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
 
+#fullscreen
+#from kivy.core.window import Window
+#Window.fullscreen = True
+
 class CalcWidget(Widget):
     def __init__(self):
         super().__init__()
@@ -18,6 +22,9 @@ class CalcWidget(Widget):
         #if separator used use precision in calc
         if self.separatorUsed:
             self.precision += 1
+        #use highest precision
+        if self.precision > self.highPrecision:
+            self.highPrecision = self.precision
         if self.ids.calc_input.text == "0" or "=" in self.ids.calc_input.text:
             self.ids.calc_input.text = str(value)
         else:
@@ -28,7 +35,7 @@ class CalcWidget(Widget):
     def btn_dot(self):
         self.separatorUsed = True
         #use highest precision
-        if self.precision > 0:
+        if self.precision > self.highPrecision:
             self.highPrecision = self.precision
         #only one dot at time
         if self.ids.calc_input.text[-1] != ".":
@@ -57,7 +64,11 @@ class CalcWidget(Widget):
 
     def btn_calculate(self):
         try:
-            res = round(eval(self.ids.calc_input.text), self.highPrecision)
+            res = eval(self.ids.calc_input.text)
+            if res:
+                if self.highPrecision > 0:
+                    res = round(res, self.highPrecision)
+
             self.ids.calc_input.text += " = " + str(res)
         except SyntaxError:
             self.ids.calc_input.text = "err"
