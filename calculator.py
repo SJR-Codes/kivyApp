@@ -4,16 +4,18 @@ from kivy.uix.widget import Widget
 class CalcWidget(Widget):
     def __init__(self):
         super().__init__()
-        #allow only one operand
+        #allow only one operand & other magic variables
         self.operandUsed = False
         self.separatorUsed = False
         self.precision = 0
+        self.highPrecision = 0
 
     #laskimen toiminnot tänne
     def btn_exit(self):
         exit()
 
     def btn_num(self, value):
+        #if separator used use precision in calc
         if self.separatorUsed:
             self.precision += 1
         if self.ids.calc_input.text == "0" or "=" in self.ids.calc_input.text:
@@ -25,6 +27,9 @@ class CalcWidget(Widget):
     #TODO: , or . based on locale
     def btn_dot(self):
         self.separatorUsed = True
+        #use highest precision
+        if self.precision > 0:
+            self.highPrecision = self.precision
         #only one dot at time
         if self.ids.calc_input.text[-1] != ".":
             self.ids.calc_input.text += "."
@@ -37,10 +42,7 @@ class CalcWidget(Widget):
 
     #clear input
     def btn_c(self):
-        #reset magic
-        self.operandUsed = False
-        self.separatorUsed = False
-        self.precision = 0
+        self.resetMagic()
         #reset input field
         self.ids.calc_input.text = ""
 
@@ -55,17 +57,20 @@ class CalcWidget(Widget):
 
     def btn_calculate(self):
         try:
-            res = round(eval(self.ids.calc_input.text), self.precision)
+            res = round(eval(self.ids.calc_input.text), self.highPrecision)
             self.ids.calc_input.text += " = " + str(res)
         except SyntaxError:
             self.ids.calc_input.text = "err"
         except NameError:
             self.ids.calc_input.text = "errkele!"
-        #reset magic
+        self.resetMagic()
+    
+    #reset magic
+    def resetMagic(self):
         self.operandUsed = False
         self.separatorUsed = False
         self.precision = 0
-    
+        self.highPrecision = 0
 
 #main class same ass apps filename
 class Calculator(App):
