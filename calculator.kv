@@ -1,0 +1,149 @@
+#:kivy 2.1.0
+<CalcWidget>
+    BoxLayout:
+        orientation:"vertical"
+        size:root.width, root.height
+
+        TextInput:
+            id:calc_input
+            text:"0"
+            halign:"right"
+            font_size:45
+            size_hint:(1, .15)
+
+        GridLayout:
+            cols:4
+            rows:5
+
+            #Row 1
+            Button:
+                id:btn_off
+                text:"OFF"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_exit()
+            Button:
+                id:btn_ce
+                text:"CE"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_c()
+            Button:
+                id:btn_c
+                text:"C"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_c()
+            Button:
+                id:btn_divide
+                text:"/"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_operand("/")
+
+            #Row 2
+            Button:
+                id:btn_7
+                text:"7"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_num(7)
+            Button:
+                id:btn_8
+                text:"8"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_num(8)
+            Button:
+                id:btn_9
+                text:"9"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_num(9)
+            Button:
+                id:btn_multiply
+                text:"*"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_operand("*")
+
+            #Row 3
+            Button:
+                id:btn_4
+                text:"4"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_num(4)
+            Button:
+                id:btn_5
+                text:"5"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_num(5)
+            Button:
+                id:btn_6
+                text:"6"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_num(6)
+            Button:
+                id:btn_minus
+                text:"-"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_operand("-")
+
+            #Row 4
+            Button:
+                id:btn_1
+                text:"1"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_num(1)
+            Button:
+                id:btn_2
+                text:"2"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_num(2)
+            Button:
+                id:btn_3
+                text:"3"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_num(3)
+            Button:
+                id:btn_plus
+                text:"+"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_operand("+")
+
+            #Row 5
+            Button:
+                id:btn_negate
+                text:"+/-"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_negate()
+            Button:
+                id:btn_0
+                text:"0"
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_num(0)
+            Button:
+                id:btn_dot
+                text:"."
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_dot()
+            Button:
+                id:btn_equal
+                text:"="
+                size_hint:(.24, .19)
+                font_size:32
+                on_press:root.btn_calculate()
+
+
+        
